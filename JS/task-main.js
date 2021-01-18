@@ -56,37 +56,47 @@ console.log('getUsersWithAge', getUsersWithAge(users, 30, 40));
 // // Задание 7
 // // Получить общую сумму баланса (поле balance) всех пользователей.
 
-// const calculateTotalBalance = users => {
-//   // твой код
-// };
+const calculateTotalBalance = users =>
+  users.reduce((totalBalance, value) => totalBalance + value.balance, 0);
 
-// console.log(calculateTotalBalance(users)); // 20916
+console.log('calculateTotalBalance', calculateTotalBalance(users)); // 20916
 // Задание 8
 // Массив имен всех пользователей у которых есть друг с указанным именем.
 
-// const getUsersWithFriend = (users, friendName) => {
-//   // твой код
-// };
+const getUsersWithFriend = (users, friendName) =>
+  users
+    .filter(user => user.friends.includes(friendName))
+    .map(user => user.name);
 
-// console.log(getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
-// console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
+console.log('getUsersWithFriend', getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
+console.log('getUsersWithFriend', getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
 
 // // Задание 9
 // // Массив имен (поле name) людей, отсортированных в зависимости от количества их друзей (поле friends)
 
-// const getNamesSortedByFriendsCount = users => {
-//   // твой код
-// };
+const getNamesSortedByFriendsCount = users =>
+  users
+    .sort((prev, next) => prev.friends.length - next.friends.length)
+    .map(user => user.name);
 
-// console.log(getNamesSortedByFriendsCount(users));
-// // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
+console.log(
+  'getNamesSortedByFriendsCount',
+  getNamesSortedByFriendsCount(users),
+);
+// [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
 
 // // Задание 10
 // // Получить массив всех умений всех пользователей (поле skills), при этом не должно быть повторяющихся умений и они должны быть отсортированы в алфавитном порядке.
 
-// const getSortedUniqueSkills = users => {
-//   // твой код
-// };
+const getSortedUniqueSkills = users =>
+  users
+    .reduce((allSkills, skillName) => {
+      let uniqueSkills = skillName.skills.filter(
+        skill => !allSkills.includes(skill),
+      );
+      return [...allSkills, ...uniqueSkills];
+    }, [])
+    .sort();
 
-// console.log(getSortedUniqueSkills(users));
-// // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+console.log('getSortedUniqueSkills', getSortedUniqueSkills(users));
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
